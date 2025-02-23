@@ -1,9 +1,9 @@
 const cacheName = "DefaultCompany-自然麻将_Client-1.0";
 const contentToCache = [
     "Build/natural-build.loader.js",
-    "Build/natural-build.framework.js",
-    "Build/natural-build.data",
-    "Build/natural-build.wasm",
+    "Build/natural-build.framework.js.unityweb",
+    "Build/natural-build.data.unityweb",
+    "Build/natural-build.wasm.unityweb",
     "TemplateData/style.css"
 
 ];
