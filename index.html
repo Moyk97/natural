@@ -10,7 +10,13 @@
   </head>
   <body>
     <div id="unity-container">
-      <canvas id="unity-canvas" width=1440 height=810 tabindex="-1"></canvas>
+      <canvas id="unity-canvas" style=" position: absolute; width: 1920px; height: 1080px;"></canvas>
+      <style>
+        html
+        {
+          background-color: black;
+        }
+      </style>
       <div id="unity-loading-bar">
         <div id="unity-logo"></div>
         <div id="unity-progress-bar-empty">
@@ -101,26 +107,32 @@
     </script>
 
 <script>
-  function resizeGame() {
-        var gameContainer = document.getElementById("unity-container");
-        var widthToHeight = 16 / 9;
-        var newWidth = window.innerWidth;
-        var newHeight = window.innerHeight;
-        var newWidthToHeight = newWidth / newHeight;
-   
-        if (newWidthToHeight > widthToHeight) {
-            newWidth = newHeight * widthToHeight;
-          } else {
-            newHeight = newWidth / widthToHeight;
-        }
-   
-        gameContainer.style.width = newWidth + 'px';
-        gameContainer.style.height = newHeight + 'px';
-      }
-   
-      window.addEventListener('resize', resizeGame, false);
-      resizeGame();
-  </script>
+  var unityContainer = document.getElementById('unity-canvas');
+  function unityContainerResize()
+  {
+    var w = window.innerWidth || document.body.clientWidth,
+            h = window.innerHeight || document.body.clientHeight,
+            ratio = 16 / 9,
+            r = w/h;
+    var setW, setH, setTop, setLeft;
+    if (r >= ratio) { // 高度撑满
+      setW = h * ratio;
+      setLeft = (w - setW) / 2;
+    } else { // 宽度撑满
+      setH = w / ratio;
+      setTop = (h - setH) / 2;
+    }
+    
+
+    unityContainer.style.width = (setW || w) + 'px';
+    unityContainer.style.height = (setH || h) + 'px';
+    unityContainer.style.top = (setTop || 0) + 'px';
+    unityContainer.style.left = (setLeft || 0) + 'px';
+
+  }
+  window.addEventListener('resize', unityContainerResize)
+  unityContainerResize()
+</script>
 
   </body>
 </html>
